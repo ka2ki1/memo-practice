@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Memo;
+use App\Http\Requests\MemoStoreRequest;
 use Illuminate\Http\Request;
 
 class MemoController extends Controller
@@ -13,15 +14,11 @@ class MemoController extends Controller
         return view('memos.index', compact('memos'));
     }
 
-    public function store(Request $request)
+    public function store(MemoStoreRequest $request)
     {
-        $validated = $request->validate([
-            'body' => ['required', 'string', 'max:255'],
-        ]);
-
         Memo::create([
-            'user_id' => auth()->id(),
-            'body' => $validated['body'],
+            'user_id' => $request->user()->id,
+            'body' => $request->validated()['body'],
         ]);
 
         return redirect()->route('memos.index');
