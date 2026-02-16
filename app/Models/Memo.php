@@ -7,9 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Memo extends Model
 {
-
     use HasFactory;
 
-    protected $fillable = ['user_id', 'body'];
-
+    protected $fillable = ['body', 'user_id']; 
 }
