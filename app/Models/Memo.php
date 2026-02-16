@@ -9,5 +9,5 @@ class Memo extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['body', 'user_id']; // 必要に応じて
+    protected $fillable = ['body', 'user_id']; 
 }

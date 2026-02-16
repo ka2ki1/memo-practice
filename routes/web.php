@@ -17,8 +17,9 @@ Route::get('/dashboard', function () {
 Route::redirect('/', '/memos');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/memos', [MemoController::class, 'index'])->name('memos.index');
-    Route::post('/memos', [MemoController::class, 'store'])->name('memos.store');
+    Route::resource('memos', MemoController::class)->only([
+        'index', 'store', 'edit', 'update', 'destroy',
+    ]);
 });
 
 

@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Memo;
 use App\Http\Requests\MemoStoreRequest;
-use Illuminate\Http\Request;
+use App\Models\Memo;
 
 class MemoController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Memo::class, 'memo');
+    }
+
     public function index()
     {
         $memos = Memo::latest()->paginate(10);
@@ -21,6 +25,26 @@ class MemoController extends Controller
             'body' => $request->validated()['body'],
         ]);
 
+        return redirect()->route('memos.index');
+    }
+
+    public function edit(Memo $memo)
+    {
+        return view('memos.edit', compact('memo'));
+    }
+
+    public function update(MemoStoreRequest $request, Memo $memo)
+    {
+        $memo->update([
+            'body' => $request->validated()['body'],
+        ]);
+
+        return redirect()->route('memos.index');
+    }
+
+    public function destroy(Memo $memo)
+    {
+        $memo->delete();
         return redirect()->route('memos.index');
     }
 }
