@@ -11,6 +11,9 @@
             @enderror
 
             <button class="px-4 py-2 border rounded" type="submit">更新</button>
+
+            <a href="{{ route('memos.index') }}" class="underline text-sm">戻る</a>
+
         </form>
     </div>
 </x-app-layout>
