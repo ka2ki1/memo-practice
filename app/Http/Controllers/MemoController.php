@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\MemoStoreRequest;
 use App\Models\Memo;
+use Illuminate\Http\Request;
 
 class MemoController extends Controller
 {
@@ -12,9 +13,16 @@ class MemoController extends Controller
         $this->authorizeResource(Memo::class, 'memo');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $memos = Memo::latest()->paginate(10);
+        $query = Memo::query();
+
+        if ($request->filled('q')) {
+            $query->where('body', 'like', '%' . $request->q . '%');
+        }
+
+        $memos = $query->latest()->paginate(10)->withQueryString();
+
         return view('memos.index', compact('memos'));
     }
 

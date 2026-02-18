@@ -8,6 +8,12 @@
                 <p class="text-red-600 text-sm">{{ $message }}</p>
             @enderror
             <button class="px-4 py-2 border rounded" type="submit">投稿</button>
+
+            <form method="GET" action="{{ route('memos.index') }}" class="mb-4">
+                <input type="text" name="q" value="{{ request('q') }}" placeholder="メモを検索"
+                    class="w-full border rounded px-3 py-2">
+            </form>
+
         </form>
 
         <div class="space-y-2">
