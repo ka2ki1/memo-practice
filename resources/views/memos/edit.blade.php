@@ -10,10 +10,21 @@
                 <p class="text-red-600 text-sm">{{ $message }}</p>
             @enderror
 
-            <button class="px-4 py-2 border rounded" type="submit">更新</button>
+            <div class="flex gap-3 mt-4">
+                {{-- 更新 --}}
+                <button type="submit"
+                    class="px-4 py-2 rounded bg-gray-200 text-blue-600 text-sm font-medium
+                hover:bg-gray-300 transition">
+                    更新
+                </button>
 
-            <a href="{{ route('memos.index') }}" class="underline text-sm">戻る</a>
-
+                {{-- 戻る --}}
+                <a href="{{ route('memos.index') }}"
+                    class="px-4 py-2 rounded bg-gray-200 text-gray-800 text-sm font-medium
+                hover:bg-gray-300 transition">
+                    戻る
+                </a>
+            </div>
         </form>
     </div>
 </x-app-layout>
