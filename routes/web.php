@@ -3,10 +3,14 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MemoController;
+use App\Http\Controllers\MemoLikeController;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::post('/memos/{memo}/like', [MemoLikeController::class, 'store'])->name('memos.like');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

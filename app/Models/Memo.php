@@ -9,5 +9,11 @@ class Memo extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['body', 'user_id']; 
+    protected $fillable = ['body', 'user_id'];
+
+    public function likedUsers()
+    {
+        return $this->belongsToMany(User::class)->withTimestamps();
+    }
+
 }
