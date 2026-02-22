@@ -12,18 +12,9 @@
 
             <div class="flex gap-3 mt-4">
                 {{-- 更新 --}}
-                <button type="submit"
-                    class="px-4 py-2 rounded bg-gray-200 text-blue-600 text-sm font-medium
-                hover:bg-gray-300 transition">
-                    更新
-                </button>
-
+                <x-button type="submit" variant="primary">更新</x-button>
                 {{-- 戻る --}}
-                <a href="{{ route('memos.index') }}"
-                    class="px-4 py-2 rounded bg-gray-200 text-gray-800 text-sm font-medium
-                hover:bg-gray-300 transition">
-                    戻る
-                </a>
+                <x-link-button :href="route('memos.index')">戻る</x-link-button>
             </div>
         </form>
     </div>
