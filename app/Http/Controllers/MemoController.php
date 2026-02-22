@@ -21,7 +21,11 @@ class MemoController extends Controller
             $query->where('body', 'like', '%' . $request->q . '%');
         }
 
-        $memos = $query->latest()->paginate(10)->withQueryString();
+        $memos = $query
+            ->with(['likedUsers:id']) // Day8: eager load
+            ->latest()
+            ->paginate(10)
+            ->withQueryString();
 
         return view('memos.index', compact('memos'));
     }
