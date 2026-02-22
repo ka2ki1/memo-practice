@@ -50,9 +50,7 @@
 
                         {{-- ③ 編集・削除（作成者のみ） --}}
                         @can('update', $memo)
-                            <a href="{{ route('memos.edit', $memo) }}" class="px-3 py-2 border rounded">
-                                編集
-                            </a>
+                            <x-button :variant="'secondary'">編集</x-button>
 
                             <form method="POST" action="{{ route('memos.destroy', $memo) }}"
                                 onsubmit="return confirm('削除しますか？');">
