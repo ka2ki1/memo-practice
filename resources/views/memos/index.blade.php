@@ -31,11 +31,11 @@
 
                     {{-- 右：アクション --}}
                     <div class="flex items-center gap-2 shrink-0">
-                        {{-- いいね --}}
+                        {{-- ① いいねボタン --}}
                         <form method="POST" action="{{ route('memos.like', $memo) }}">
                             @csrf
                             <button type="submit" class="w-10 h-10 border rounded flex items-center justify-center">
-                                @if (auth()->user()->likedMemos->contains($memo->id))
+                                @if ($memo->likedUsers->contains(auth()->id()))
                                     ❤️
                                 @else
                                     🤍
@@ -43,15 +43,24 @@
                             </button>
                         </form>
 
-                        {{-- 編集・削除（作成者のみ） --}}
+                        {{-- ② いいね数 --}}
+                        <span class="text-xs text-gray-500">
+                            {{ $memo->likedUsers->count() }}
+                        </span>
+
+                        {{-- ③ 編集・削除（作成者のみ） --}}
                         @can('update', $memo)
-                            <a href="{{ route('memos.edit', $memo) }}" class="px-3 py-2 border rounded">編集</a>
+                            <a href="{{ route('memos.edit', $memo) }}" class="px-3 py-2 border rounded">
+                                編集
+                            </a>
 
                             <form method="POST" action="{{ route('memos.destroy', $memo) }}"
                                 onsubmit="return confirm('削除しますか？');">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="px-3 py-2 border rounded">削除</button>
+                                <button type="submit" class="px-3 py-2 border rounded">
+                                    削除
+                                </button>
                             </form>
                         @endcan
                     </div>
